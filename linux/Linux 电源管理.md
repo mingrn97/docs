@@ -107,39 +107,39 @@ $ cat /etc/systemd/logind.conf
                     <td>说明</td>
                 </tr>
                 <tr>
-                    <td>ignore</td>
+                    <td><code>ignore</code></td>
                     <td>忽略, 啥也不干</td>
                 </tr>
                 <tr>
-                    <td>poweroff</td>
+                    <td><code>poweroff</code></td>
                     <td>关机</td>
                 </tr>
                 <tr>
-                    <td>reboot</td>
+                    <td><code>reboot</code></td>
                     <td>关机重启</td>
                 </tr>
                 <tr>
-                    <td>halt</td>
+                    <td><code>halt</code></td>
                     <td>挂起, 停止所有的 CPU 功能, 但是仍然保持通电</td>
                 </tr>
                 <tr>
-                    <td>kexec</td>
+                    <td><code>kexec</code></td>
                     <td>仅可以调用内核 "kexec" 函数</td>
                 </tr>
                 <tr>
-                    <td>suspend</td>
+                    <td><code>suspend</code></td>
                     <td>待机</td>
                 </tr>
                 <tr>
-                    <td>hibernate</td>
+                    <td><code>hibernate</code></td>
                     <td>睡眠（内存数据会存入硬盘并关闭电源）</td>
                 </tr>
                 <tr>
-                    <td>hybrid-sleep</td>
+                    <td><code>hybrid-sleep</code></td>
                     <td>混合睡眠 = 睡眠 + 休眠, 主要是为台式机设计的, 内存和CPU还是活的</td>
                 </tr>
                 <tr>
-                    <td>suspend-then-hibernate</td>
+                    <td><code>suspend-then-hibernate</code></td>
                     <td>先进入待机（suspend）然后再进入睡眠（hibernate）</td>
                 </tr>
                 <tr>

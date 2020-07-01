@@ -124,7 +124,7 @@ $ cat /etc/systemd/logind.conf
                 </tr>
                 <tr>
                     <td><code>kexec</code></td>
-                    <td>仅可以调用内核 "kexec" 函数</td>
+                    <td>仅可以调用内核 <code>kexec</code> 函数</td>
                 </tr>
                 <tr>
                     <td><code>suspend</code></td>
@@ -140,11 +140,11 @@ $ cat /etc/systemd/logind.conf
                 </tr>
                 <tr>
                     <td><code>suspend-then-hibernate</code></td>
-                    <td>先进入待机（suspend）然后再进入睡眠（hibernate）</td>
+                    <td>先进入待机（<code>suspend</code>）然后再进入睡眠（<code>hibernate</code>）</td>
                 </tr>
                 <tr>
                     <td><code>lock</code></td>
-                    <td>锁屏, 机器继续跑（相当于 WIN + L）</td>
+                    <td>锁屏, 机器继续跑（相当于 <code>WIN + L</code>）</td>
                 </tr>
             </table>
         </td>

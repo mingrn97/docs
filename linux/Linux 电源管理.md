@@ -57,3 +57,130 @@ $ cat /etc/systemd/logind.conf
 #UserTasksMax=
 ```
 
+在该文件中展示的配置都处于注释状态，也就是其默认值。这么多配置真正与电源有关的配置是如下几个：
+
+```bash
+#IdleActionSec=30min
+
+#IdleAction=ignore
+#HandlePowerKey=poweroff
+#HandleSuspendKey=suspend
+#HandleHibernateKey=hibernate
+#HandleLidSwitch=suspend
+#HandleLidSwitchDocked=ignore
+
+#PowerKeyIgnoreInhibited=no
+#SuspendKeyIgnoreInhibited=no
+#HibernateKeyIgnoreInhibited=no
+#LidSwitchIgnoreInhibited=yes
+```
+
+这些值得示意如下：
+
+```
+#IdleActionSec: 接受的是一个正整数, 表示 x 时间后执行 IdleAction 的操作. 时间后缀有: ms, s, min, h 和 d
+
+下面六个配置可选值相同, 下面会做说明
+#IdleAction:                IdleActionSec 时间后执行的行为
+#HandlePowerKey:            按下电源键执行的行为
+#HandleSuspendKey:          自动待机挂起后执行的行为
+#HandleHibernateKey:        按下休眠键执行的行为
+#HandleLidSwitch:           笔记本合盖后执行的行为
+#HandleLidSwitchDocked:     笔记本合盖后外接显示器的行为
+
+下面四个值分别对应上面的六个配置, 可选值是 no/yes. 表示是否忽略上面配置的行为
+#PowerKeyIgnoreInhibited:      按下电源键是否需要忽略 HandlePowerKey 配置的行为
+#SuspendKeyIgnoreInhibited:    自动那个待机挂起后是否需要忽略 HandleSuspendKey 配置的行为
+#HibernateKeyIgnoreInhibited:  按下休眠键后是否需要忽略 HandleHibernateKey 配置的行为
+#LidSwitchIgnoreInhibited:     合上笔记本后是否需要忽略 HandleLidSwitch/HandleLidSwitchDocked 配置的行为
+```
+
+<table>
+    <tr align="center">
+        <td>可选值</td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>可选值</td>
+                    <td>说明</td>
+                </tr>
+                <tr>
+                    <td>ignore</td>
+                    <td>忽略, 啥也不干</td>
+                </tr>
+                <tr>
+                    <td>poweroff</td>
+                    <td>关机</td>
+                </tr>
+                <tr>
+                    <td>reboot</td>
+                    <td>关机重启</td>
+                </tr>
+                <tr>
+                    <td>halt</td>
+                    <td>挂起, 停止所有的 CPU 功能, 但是仍然保持通电</td>
+                </tr>
+                <tr>
+                    <td>kexec</td>
+                    <td>仅可以调用内核 "kexec" 函数</td>
+                </tr>
+                <tr>
+                    <td>suspend</td>
+                    <td>待机</td>
+                </tr>
+                <tr>
+                    <td>hibernate</td>
+                    <td>睡眠（内存数据会存入硬盘并关闭电源）</td>
+                </tr>
+                <tr>
+                    <td>hybrid-sleep</td>
+                    <td>混合睡眠 = 睡眠 + 休眠, 主要是为台式机设计的, 内存和CPU还是活的</td>
+                </tr>
+                <tr>
+                    <td>suspend-then-hibernate</td>
+                    <td>先进入待机（suspend）然后再进入睡眠（hibernate）</td>
+                </tr>
+                <tr>
+                    <td>lock</td>
+                    <td>锁屏, 机器继续跑（相当于 WIN + L）</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+# 测试
+
+现在笔者就用自己的笔记本进行测试，因为笔记本做的是 CentOS 服务器而不是桌面版所有不存在外接显示器，仅仅将 `HandleLidSwitch` 修改为 `lock`，即合盖后机器继续正常跑：
+
+```bash
+HandleLidSwitch=lock
+```
+
+修改完成后进行保存完后重启 `systemd-logind.service` 服务：
+
+```bash
+sudo systemctl restart systemd-logind.service
+```
+
+完后合上笔记本！
+
+| 合盖仪式                                |
+| --------------------------------------- |
+| ![close-my-pc](./_imgs/close-my-pc.png) |
+
+然后继续使用客户端进行连接：
+
+```bash
+$ ssh pri.srv1
+Last login: Wed Jul  1 16:27:24 2020 from 172.16.6.209
+[itumate@localhost ~]$
+```
+
+Perfect！！！！
+
+# 参考资料
+
+- [Ubuntu Manpage: logind.conf, logind.conf.d - 登陆管理器配置文件 ](https://manpages.ubuntu.com/manpages/cosmic/zh_CN/man5/logind.conf.5.html)

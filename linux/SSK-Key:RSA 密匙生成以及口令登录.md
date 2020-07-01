@@ -132,7 +132,7 @@ The key's randomart image is:
 ```
 
 | Note                                                         |
-| ------------------------------------------------------------ |
+| :----------------------------------------------------------- |
 | 如果之前已经生成了 `rsa` 文件，通过该命令会生成一个新的 `rsa` 并直接替换已有的 `rsa` 文件，具体稍后会做说明。 |
 
 
@@ -149,8 +149,6 @@ Enter same passphrase again:
 
 而且，还需要在 `Enter same passphrase again` 中再次输出口令以确定你没有输入错误。这样是不是比较麻烦？所以： 建议在生成带有口令密匙的 `rsa` 文件时建议指定 `-N` 用于铭文设置口令！
 
-
-
 ## 指定 SSH-Key 注释
 指定加密文件注释使用的是 `-C` 参数，那这个有什么用呢？先别管有什么用，我们先随意生成一个再说：
 
@@ -163,7 +161,7 @@ $ ssh-keygen -t rsa -C "MyMail@mail.com"
 所以，它的作用就是用于注释 `rsa` 文件。如果你有多个 `rsa`，你只需要打开 `rsa.pub` 文件看看注释即可知道该文件的用途，所以还是蛮有用的。
 
 | Note                                                         |
-| ------------------------------------------------------------ |
+| :----------------------------------------------------------- |
 | 通常，在生成密匙的时候建议设置注释信息。因为很多网站和软件用这个注释作为密钥的名字，如 Github、Gitlab。另一方面对于多个 `rsa` 文件也可以有效的做区分。 |
 
 ## 指定生成 rsa 文件名称
@@ -185,18 +183,22 @@ $ ssh-keygen -t rsa -C "MyNewRsa" -N "RsaPwd" -f ~/.ssh/mymail@mail.com
 ```
 
 <table>
-	<tr>
-		<td>Note</td>
-	</tr>
-	<tr>
-		<td>
-			<code>-f</code> 选项指定的是文件名称以及文件存储的位置，这里指定了存储的位置在 <code>~/.ssh/</code> 且文件名称是 <code>mymail@mail.com</code>。如果你不去指定路径会将文件生成在你执行命令的目录（即当前目录），这里需要注意！<br/>
-			另外， <code>-f</code> 选项后面不能是字符串： <code>"~/.ssh/mymail@mail.com"</code> 。
-			如果这么指定会报如下错误：<br />
-			<pre>Saving key "~/.ssh/mymail@mail.com" failed: No such file or directory</pre> 
+	<thead>
+		<tr>
+			<td>Note</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<code>-f</code> 选项指定的是文件名称以及文件存储的位置，这里指定了存储的位置在 <code>~/.ssh/</code> 且文件名称是 <code>mymail@mail.com</code>。如果你不去指定路径会将文件生成在你执行命令的目录（即当前目录），这里需要注意！<br/>
+				另外， <code>-f</code> 选项后面不能是字符串： <code>"~/.ssh/mymail@mail.com"</code> 。如果这么指定会报如下错误：<br />
+				<pre>Saving key "~/.ssh/mymail@mail.com" failed: No such file or directory</pre> 
 		</td>
 	</tr>
+	</tbody>
 </table>
+
 生成步骤如下：
 
 ```bash
@@ -298,17 +300,22 @@ Last login: Tue Feb 25 21:04:25 2020 from 172.16.3.18
 ```
 
 <table>
-	<tr>
-		<td>Note</td>
-	</tr>
-	<tr>
-		<td>
-			如果需要将 <code>rsa</code> 公钥发送远程主机，建议生成的 <code>rsa</code> 不要设置口令。如果设置口令，之后远程主机时虽然不需要远程主机的用户密码，但是要求你输入 <code>rsa</code> 口令，如下：<br />
-			<pre>Enter passphrase for key '/home/user/.ssh/id_rsa':</pre> 
-			当然这个问题有解决方案见 <a id="使用 ssh-add 解决私钥密码登录问题">使用 ssh-add 解决私钥密码登录问题</a>
-		</td>
-	</tr>
+	<thead>
+		<tr>
+			<td>Note</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				如果需要将 <code>rsa</code> 公钥发送远程主机，建议生成的 <code>rsa</code> 不要设置口令。如果设置口令，之后远程主机时虽然不需要远程主机的用户密码，但是要求你输入 <code>rsa</code> 口令，如下：<br />
+				<pre>Enter passphrase for key '/home/user/.ssh/id_rsa':</pre><br />
+				当然这个问题有解决方案见 <a id="使用 ssh-add 解决私钥密码登录问题">使用 ssh-add 解决私钥密码登录问题</a>
+			</td>
+		</tr>
+	</tbody>
 </table>
+
 想一下，尽管这种方式简便了许多，但是要求你记住远程 ip。虽然我们能够写脚本，但是依然不太方便。下面就来看另外一种更简单的方式！
 
 ## 使用 ssh_config
@@ -425,7 +432,7 @@ ServerAliveCountMax 3   #client发出请求后, 服务器端没有响应得次�
 ```
 
 | Note                                                         |
-| ------------------------------------------------------------ |
+| :----------------------------------------------------------- |
 | 上面配置的数值时任意的。另外，还有其他可选配置信息。具体可以通过 `man sshd_config` 命令查看其他的配置命令 |
 
 

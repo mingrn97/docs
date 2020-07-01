@@ -96,8 +96,8 @@ $ cat /etc/systemd/logind.conf
 ```
 
 <table>
-    <tr align="center">
-        <td>可选值</td>
+    <tr>
+        <td>下面是六个配置的可选值</td>
     </tr>
     <tr>
         <td>

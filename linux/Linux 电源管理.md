@@ -143,7 +143,7 @@ $ cat /etc/systemd/logind.conf
                     <td>先进入待机（suspend）然后再进入睡眠（hibernate）</td>
                 </tr>
                 <tr>
-                    <td>lock</td>
+                    <td><code>lock</code></td>
                     <td>锁屏, 机器继续跑（相当于 WIN + L）</td>
                 </tr>
             </table>

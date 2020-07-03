@@ -309,7 +309,7 @@ Type=forking
 User=sonar
 Group=sonar
 
-#---- 默认PID存储位置
+# ---- 默认PID存储位置, 可以不显示指定
 # PIDFile=/opt/sonar/sonarqube-7.5/bin/linux-x86-64/SonarQube.pid
 
 ExecStart=/opt/sonar/sonarqube-7.5/bin/linux-x86-64/sonar.sh start
